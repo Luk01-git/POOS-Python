@@ -45,5 +45,3 @@ class Paciente:
 
     def __repr__(self)-> str:
         return f"Paciente(rut='{self.rut}', nombre='{self.nombre}', edad={self.edad}, prevision='{self.prevision}')"
-
-    #https://github.com/larriag13/01-POOS-Python-n2p13c1.git
