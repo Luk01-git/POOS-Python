@@ -44,21 +44,25 @@ def agregar_paciente()-> None:
     print("3. Particular")
     print("4. Otro")
     opcion=leer_numero("Ingrese el número de la previsión del paciente: ")
-    if opcion==1:
-        prevision="Fonasa"
-    elif opcion==2:
-        prevision="Isapre"
-    elif opcion==3:
-        prevision="Particular"
-    elif opcion==4:
-        prevision="Otro"
-    else:
-        print("Opción inválida. Se asignará 'Otro' como previsión por defecto.")
-        prevision="Otro"
     try:
-        paciente=Paciente(rut,nombre,edad,prevision)
-    except (TypeError, ValueError) as e:
-        print(f"Error al crear el paciente: {e}")
+        if opcion==1:
+            prevision="Fonasa"
+        elif opcion==2:
+            prevision="Isapre"
+        elif opcion==3:
+            prevision="Particular"
+        elif opcion==4:
+            prevision="Otro"
+        else:
+            print("Opción inválida. Se asignará 'Otro' como previsión por defecto.")
+            prevision="Otro"
+        try:
+            paciente=Paciente(rut,nombre,edad,prevision)
+        except (TypeError, ValueError) as e:
+            print(f"Error al crear el paciente: {e}")
+            return
+    except Exception as e:
+        print(f"Error al seleccionar la previsión: {e}")
         return
     
     paciente=Paciente(rut,nombre,edad,prevision, departamento_general)

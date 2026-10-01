@@ -62,6 +62,8 @@ class Paciente:
 
     @departamento.setter
     def departamento(self, departamento: Departamento | None) -> None:
+        if departamento is not None and not isinstance(departamento, Departamento):
+            raise TypeError("El departamento debe ser una instancia de la clase Departamento o None.")
         self._departamento = departamento
 
     def __str__(self)-> str:
