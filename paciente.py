@@ -18,7 +18,9 @@ class Paciente:
 
     @rut.setter
     def rut(self,rut:str)-> None:
-        self._rut = rut
+        if not isinstance(rut, str) or not rut.strip():
+            raise TypeError("El RUT no puede estar vacío.")
+        self._rut = rut.strip()
 
     @property
     def nombre(self)-> str:
@@ -26,7 +28,9 @@ class Paciente:
 
     @nombre.setter
     def nombre(self,nombre:str)-> None:
-        self._nombre = nombre
+        if not isinstance(nombre, str) or len(nombre.strip()) < 2:
+            raise TypeError("El nombre no puede estar vacío y debe tener al menos 2 caracteres.")
+        self._nombre = nombre.strip()
 
     @property
     def edad(self)->int:
@@ -34,6 +38,8 @@ class Paciente:
 
     @edad.setter
     def edad(self,edad:int)-> None:
+        if not isinstance(edad, int) or edad < 0 or edad > 120:
+            raise TypeError("Ingrese un numero valido (entero positivo).")
         self._edad=edad
 
     @property
@@ -41,8 +47,14 @@ class Paciente:
         return self._prevision
 
     @prevision.setter
-    def prevision(self,prevision:str)-> None:
-        self._prevision=prevision
+    def prevision(self, prevision:str)-> None:
+        if not isinstance(prevision, str):
+            raise TypeError("La previsión debe ser una cadena de texto.")
+        prevision_l = prevision.strip()
+        if prevision_l not in self.PREVISIONES_VALIDAS:
+            opciones = ", ".join(self.PREVISIONES_VALIDAS)
+            raise ValueError(f"La previsión debe ser una de las siguientes: {opciones}")
+        self._prevision=prevision_l
 
     @property
     def departamento(self) -> Departamento | None:
