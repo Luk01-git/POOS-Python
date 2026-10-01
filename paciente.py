@@ -1,12 +1,16 @@
+from departamento import Departamento
+
+
 class Paciente:
 
     PREVISIONES_VALIDAS:set[str]={"Fonasa","Isapre","Particular","Otro"}
 
-    def __init__(self, rut:str, nombre:str, edad:int,prevision:str):
+    def __init__(self, rut:str, nombre:str, edad:int, prevision:str, departamento: Departamento | None = None):
         self.rut = rut
         self.nombre=nombre
         self.edad=edad
         self.prevision=prevision
+        self.departamento=departamento
 
     @property
     def rut(self)-> str:
@@ -40,8 +44,17 @@ class Paciente:
     def prevision(self,prevision:str)-> None:
         self._prevision=prevision
 
+    @property
+    def departamento(self) -> Departamento | None:
+        return self._departamento
+
+    @departamento.setter
+    def departamento(self, departamento: Departamento | None) -> None:
+        self._departamento = departamento
+
     def __str__(self)-> str:
-        return f"Información del paciente:\nRUT: {self.rut}\nNombre: {self.nombre}\nEdad: {self.edad}\nPrevisión: {self.prevision}"
+        detalle_departamento = str(self.departamento) if self.departamento else "Sin departamento asignado"
+        return f"Información del paciente:\nRUT: {self.rut}\nNombre: {self.nombre}\nEdad: {self.edad}\nPrevisión: {self.prevision}\n{detalle_departamento}"
 
     def __repr__(self)-> str:
-        return f"Paciente(rut='{self.rut}', nombre='{self.nombre}', edad={self.edad}, prevision='{self.prevision}')"
+        return f"Paciente(rut='{self.rut}', nombre='{self.nombre}', edad={self.edad}, prevision='{self.prevision}', departamento={self.departamento!r})"

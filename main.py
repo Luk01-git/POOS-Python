@@ -1,8 +1,6 @@
+from departamento import Departamento
 from paciente import Paciente
-pacientes:list[Paciente]=[
-    Paciente("67.676.767-6","Negro Cuatico",67,"Fonasa"),
-    Paciente("11.111.111-1","Pepo Pepi",32,"Isapre")
-]
+pacientes:list[Paciente]=[]
 
 def leer_numero(mensaje:str)->int:
     while True:
@@ -58,7 +56,7 @@ def agregar_paciente()-> None:
         print("Opción inválida. Se asignará 'Otro' como previsión por defecto.")
         prevision="Otro"
 
-    paciente=Paciente(rut,nombre,edad,prevision)
+    paciente=Paciente(rut,nombre,edad,prevision, departamento_general)
     pacientes.append(paciente)
     print("Paciente agregado exitosamente.")
     print(f"Total de pacientes registrados: {len(pacientes)}")
